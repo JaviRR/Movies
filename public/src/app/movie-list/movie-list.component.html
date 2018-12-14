@@ -1,0 +1,24 @@
+<div class="container p-4" style="border: 1px solid grey;">
+  <h4 style="display:inline-block;">Movie List</h4>
+  <button (click)="displayNew()" class="btn btn-success float-right">Add a new movie</button>
+  <table class="table table-striped mt-4">
+    <thead>
+      <tr>
+        <th scope="col">Movie Title</th>
+        <th scope="col">Available Actions</th>
+        <th scope="col">Average Rate</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let movie of names; let i = index">
+        <th scope="row">{{movie.title}}</th>
+        <td>
+          <button [routerLink]="['/movies/',movie._id]" class="btn btn-primary mr-3">Read Reviews</button>
+          <button [routerLink]="['/movies/'+movie._id+'/review']" class="btn btn-primary">Write Review</button>
+        </td>
+        <td>{{avgRates[i]}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<app-new-movie *ngIf="display" (myEvent)="invoke($event)"></app-new-movie>
