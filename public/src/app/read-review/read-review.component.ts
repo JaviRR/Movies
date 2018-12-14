@@ -10,6 +10,7 @@ import { HttpService } from '../http.service';
 export class ReadReviewComponent implements OnInit {
   id: any;
   reviews: any;
+  data2: any;
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
@@ -23,8 +24,9 @@ export class ReadReviewComponent implements OnInit {
   recoverReviews(){
     let observable = this._httpService.recoverReviews(this.id);
     observable.subscribe(data =>{
-      console.log(data.data.reviews);
-      this.reviews = data.data.reviews;
+      this.data2 = data;
+      console.log(this.data2.data.reviews);
+      this.reviews = this.data2.data.reviews;
     })
   }
   deleteReview(id){

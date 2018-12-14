@@ -13,6 +13,8 @@ export class NewMovieComponent implements OnInit {
   review: any;
   id: any;
   error: any;
+  data1: any;
+  data2: any;
   constructor(private _httpService: HttpService){}
 
   ngOnInit() {
@@ -25,16 +27,18 @@ export class NewMovieComponent implements OnInit {
     let observable = this._httpService.newMovie(this.movie);
     observable.subscribe(data =>{
       console.log(data);
-      if(data.error){
-        this.error = data.error.errors.title.message;
+      this.data1 = data;
+      if(this.data1.error){
+        this.error = this.data1.error.errors.title.message;
       }else{
-        this.id = data.data._id;
+        this.id = this.data1.data._id;
         console.log(this.id);
         let observable2 = this._httpService.newReview(this.review, this.id);
         observable2.subscribe(data =>{
+          this.data2 = data;
           console.log(data);
-          if(data.error){
-            this.error = data.error.message;
+          if(this.data2.error){
+            this.error = this.data2.error.message;
             let observable3 = this._httpService.removeMovie({id: this.id});
             observable3.subscribe(data => {
               console.log(data);

@@ -11,7 +11,7 @@ export class WriteReviewComponent implements OnInit {
   id: any;
   title: any;
   review: any;
-
+  data2: any;
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
@@ -26,7 +26,8 @@ export class WriteReviewComponent implements OnInit {
     let observable = this._httpService.recoverMovie(this.id);
     observable.subscribe(data => {
       // console.log(data);
-      this.title = data.data.title;
+      this.data2 = data;
+      this.title = this.data2.data.title;
     })
   }
   onSubmit(){

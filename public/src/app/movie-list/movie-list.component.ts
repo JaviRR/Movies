@@ -8,10 +8,11 @@ import { HttpService } from '../http.service';
 })
 export class MovieListComponent implements OnInit {
   display = false;
-  names: any;
+  names: any = {};
   avgRates: any = [];
   sum = 0;
   avg = 0;
+  data2: any;
   constructor(private _httpService: HttpService){}
 
   ngOnInit() {
@@ -24,7 +25,8 @@ export class MovieListComponent implements OnInit {
     let observable = this._httpService.allMovies();
     observable.subscribe(data=>{
       console.log(data);
-      this.names = data.data;
+      this.data2 = data;
+      this.names = this.data2.data;
       for(let x=0;x<this.names.length;x++){
         for(let j=0;j<this.names[x].reviews.length;j++){
           this.sum += Number(this.names[x].reviews[j].rate);
